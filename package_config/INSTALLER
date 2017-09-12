@@ -1,0 +1,18 @@
+PACKAGES install
+
+96boards-installer-session
+android-tools-fsutils
+grub-common
+grub-efi-arm64
+kpartx
+libgl1-mesa-dri
+libgl1-mesa-glx
+lightdm
+mesa-utils
+network-manager
+x11-utils
+x11-xserver-utils
+xinit
+xserver-xorg
+xserver-xorg-input-evdev
+xserver-xorg-video-fbdev
