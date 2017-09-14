@@ -3,7 +3,7 @@
 # Make systemd less spammy
 
 sed -i 's/#LogLevel=info/LogLevel=warning/' \
-  /etc/systemd/system.conf
+  $target/etc/systemd/system.conf
 
 sed -i 's/#LogTarget=journal-or-kmsg/LogTarget=journal/' \
-  /etc/systemd/system.conf
+  $target/etc/systemd/system.conf
