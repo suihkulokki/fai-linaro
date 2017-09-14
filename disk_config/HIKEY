@@ -1,2 +1,0 @@
-disk_config disk1
-raw-disk / 4GB ext4 rw
