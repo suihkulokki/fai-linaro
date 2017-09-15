@@ -1,0 +1,30 @@
+#!/bin/sh
+# Download license file and firmware
+if [ -n "${QCOM_FIRMWARE}" ]; then
+    rm -rf qcom_firmware && mkdir qcom_firmware && cd qcom_firmware
+    wget -q ${QCOM_FIRMWARE}
+    echo "${QCOM_FIRMWARE_MD5}  $(basename ${QCOM_FIRMWARE})" > MD5
+    md5sum -c MD5
+    unzip $(basename ${QCOM_FIRMWARE})
+    # check LICENSE file (for Linux BSP)
+    echo "${QCOM_FIRMWARE_LICENSE_MD5} " linux-board-support-package-*/LICENSE > MD5
+    md5sum -c MD5
+    cd -
+    MTOOLS_SKIP_CHECK=1 mcopy -i qcom_firmware/linux-board-support-package-*/bootloaders-linux/NON-HLOS.bin \
+         ::image/modem.* ::image/mba.mbn ::image/wcnss.* qcom_firmware/linux-board-support-package-*/proprietary-linux
+    cp -f qcom_firmware/linux-board-support-package-*/LICENSE $target/etc/QCOM-LINUX-BOARD-SUPPORT-LICENSE
+    cp -a qcom_firmware/linux-board-support-package-*/proprietary-linux/* $target/lib/firmware
+
+fi
+
+if [ -f $target/etc/NetworkManager/NetworkManager.conf ]; then
+   cat << EOF | tee -a $target/etc/NetworkManager/NetworkManager.conf
+[device]
+wifi.scan-rand-mac-address=no
+EOF
+fi
+
+
+
+
+

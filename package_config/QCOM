@@ -1,0 +1,6 @@
+PACKAGES install
+linux-image-4.9.47-lt-qcom
+linux-headers-4.9.47-lt-qcom
+firmware-linux
+wcnss-start
+
