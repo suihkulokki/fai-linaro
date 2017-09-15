@@ -1,6 +1,7 @@
 PACKAGES install
-linux-image-4.9.47-lt-qcom
-linux-headers-4.9.47-lt-qcom
+u-boot-menu
+u-boot
+linux-image-4.9.47-00529-g487f36cde580
 firmware-linux
 wcnss-start
 

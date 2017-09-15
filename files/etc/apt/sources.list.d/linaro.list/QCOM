@@ -1,1 +1,2 @@
 deb http://obs.linaro.org/qcom/${release}/ ./
+deb http://obs.linaro.org/home:/riku.voipio/linaro-overlay-stretch_Debian_9.0/ ./

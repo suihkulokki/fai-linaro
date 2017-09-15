@@ -1,5 +1,4 @@
 PACKAGES install
-
 bluedevil
 breeze
 chromium
@@ -81,3 +80,5 @@ nodejs
 PACKAGES install SID
 nodejs
 
+PACKAGES install QCOM
+96boards-artwork

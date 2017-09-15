@@ -1,3 +1,4 @@
+PACKAGES install
 babeltrace
 bluez
 build-essential

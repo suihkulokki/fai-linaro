@@ -1,5 +1,4 @@
 PACKAGES install
-
 96boards-installer-session
 android-tools-fsutils
 grub-common
