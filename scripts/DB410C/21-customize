@@ -33,11 +33,13 @@ cat << EOF > $target/etc/fstab
 /dev/disk/by-label/rootfs / ext4   rw,relatime,data=ordered 0 1
 EOF
 
-# hack
+# hack - the "make deb" kernel package should handle this
 for kernel in $target/boot/vmlinuz-*
 do
     mv $kernel $kernel.gz
     gunzip $kernel
+    ver=$(echo $kernel|sed -e 's,.*vmlinuz-,,')
+    chroot $target /usr/sbin/update-initramfs -c -k $ver
 done
 
 chroot $target /usr/sbin/u-boot-update
