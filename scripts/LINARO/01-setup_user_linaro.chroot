@@ -4,4 +4,4 @@ echo "I: create linaro user"
 chroot $target adduser --gecos linaro --disabled-login linaro
 
 echo "I: set linaro user password"
-echo "linaro:linaro" | chpasswd
+echo "linaro:linaro" | chroot $target chpasswd
