@@ -30,7 +30,7 @@ U_BOOT_PARAMETERS="rw rootwait"
 EOF
 
 cat << EOF > $target/etc/fstab
-/dev/disk/by-label/rootfs / ext4   rw,relatime,data=ordered 0 1
+/dev/disk/by-partlabel/rootfs / ext4   rw,relatime,data=ordered 0 1
 EOF
 
 # hack - the "make deb" kernel package should handle this
