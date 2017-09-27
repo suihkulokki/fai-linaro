@@ -1,3 +1,4 @@
+release=stretch
 apt_cdn=http://deb.debian.org
 FAI_DEBOOTSTRAP="$release $apt_cdn/debian/"
 KEYMAP=us-latin1
