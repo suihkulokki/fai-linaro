@@ -1,4 +1,4 @@
-PACKAGES install
+PACKAGES install-norec
 bluedevil
 breeze
 chromium
@@ -71,14 +71,14 @@ xserver-xorg-video-fbdev
 xserver-xorg-video-modesetting
 xterm
 
-PACKAGES install STRETCH
+PACKAGES install-norec STRETCH
 nodejs-legacy
 
-PACKAGES install BUSTER
+PACKAGES install-norec BUSTER
 nodejs
 
-PACKAGES install SID
+PACKAGES install-norec SID
 nodejs
 
-PACKAGES install QCOM
+PACKAGES install-norec QCOM
 96boards-artwork

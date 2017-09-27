@@ -1,4 +1,4 @@
-PACKAGES install
+PACKAGES install-norec
 build-essential
 dbus-x11
 dhcpcd5

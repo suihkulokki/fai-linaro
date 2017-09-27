@@ -1,4 +1,4 @@
-PACKAGES install
+PACKAGES install-norec
 96boards-installer-session
 android-tools-fsutils
 grub-common
