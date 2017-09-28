@@ -1,13 +1,16 @@
 PACKAGES install-norec
 adduser
+anacron
 apt
 apt-utils
 ca-certificates
 console-setup
+cpufrequtils
 curl
 debconf
 debconf-i18n
 file
+firmware-linux-free
 gdb
 gnupg
 initramfs-tools
@@ -48,4 +51,3 @@ net-tools
 resolvconf
 systemd
 systemd-sysv
-
