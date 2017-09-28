@@ -42,4 +42,4 @@ do
     chroot $target /usr/sbin/update-initramfs -c -k $ver
 done
 
-chroot $target /usr/sbin/u-boot-update
+chroot $target /usr/sbin/u-boot-update||true
