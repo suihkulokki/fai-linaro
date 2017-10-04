@@ -1,7 +1,7 @@
 PACKAGES install-norec
 u-boot-menu
 u-boot
-linux-image-4.9.47-00529-g487f36cde580
+linux-image-4.9.0-qcomlt
 firmware-linux
 wcnss-start
 
