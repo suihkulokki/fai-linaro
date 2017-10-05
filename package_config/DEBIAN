@@ -10,7 +10,6 @@ curl
 debconf
 debconf-i18n
 file
-firmware-linux-free
 gdb
 gnupg
 initramfs-tools
