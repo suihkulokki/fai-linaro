@@ -8,7 +8,7 @@ fi
 
 # Enable sddm autologin for linaro user and configure theme
 if [ -e $target/usr/bin/sddm ]; then
-  $target/usr/bin/sddm --example-config > $target/etc/sddm.conf
+  chroot $target /usr/bin/sddm --example-config > $target/etc/sddm.conf
   sed -i "s|^Session=.*|Session=lxqt.desktop|" $target/etc/sddm.conf
   sed -i "s|^User=.*|User=linaro|" $target/etc/sddm.conf
   sed -i "s|^Current=.*|Current=breeze|" $target/etc/sddm.conf
