@@ -1,0 +1,2 @@
+#!/bin/bash
+fcopy -M /etc/hosts /etc/hostname
