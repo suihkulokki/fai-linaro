@@ -1,6 +1,5 @@
 PACKAGES install-norec
 linux-image-4.9.0-qcomlt
-firmware-linux
 
 PACKAGES install-norec UBOOT
 u-boot-menu
