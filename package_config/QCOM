@@ -1,7 +1,8 @@
 PACKAGES install-norec
-u-boot-menu
-u-boot
 linux-image-4.9.0-qcomlt
 firmware-linux
-wcnss-start
+
+PACKAGES install-norec UBOOT
+u-boot-menu
+u-boot-qcom
 

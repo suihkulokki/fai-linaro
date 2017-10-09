@@ -1,7 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+set -e
+
 # Download license file and firmware
 if [ -n "${QCOM_FIRMWARE}" ]; then
-    rm -rf qcom_firmware && mkdir qcom_firmware && cd qcom_firmware
+    fwdir=`mktemp -d qcom_fwXXXXXX`
+    cd $fwdir
     wget -q ${QCOM_FIRMWARE}
     echo "${QCOM_FIRMWARE_MD5}  $(basename ${QCOM_FIRMWARE})" > MD5
     md5sum -c MD5
@@ -10,11 +13,11 @@ if [ -n "${QCOM_FIRMWARE}" ]; then
     echo "${QCOM_FIRMWARE_LICENSE_MD5} " linux-board-support-package-*/LICENSE > MD5
     md5sum -c MD5
     cd -
-    MTOOLS_SKIP_CHECK=1 mcopy -i qcom_firmware/linux-board-support-package-*/bootloaders-linux/NON-HLOS.bin \
-         ::image/modem.* ::image/mba.mbn ::image/wcnss.* qcom_firmware/linux-board-support-package-*/proprietary-linux
-    cp -f qcom_firmware/linux-board-support-package-*/LICENSE $target/etc/QCOM-LINUX-BOARD-SUPPORT-LICENSE
-    cp -a qcom_firmware/linux-board-support-package-*/proprietary-linux/* $target/lib/firmware
-
+    MTOOLS_SKIP_CHECK=1 mcopy -i $fwdir/linux-board-support-package-*/bootloaders-linux/NON-HLOS.bin \
+         ::image/modem.* ::image/mba.mbn ::image/wcnss.* $fwdir/linux-board-support-package-*/proprietary-linux
+    cp -f $fwdir/linux-board-support-package-*/LICENSE $target/etc/QCOM-LINUX-BOARD-SUPPORT-LICENSE
+    cp -a $fwdir/linux-board-support-package-*/proprietary-linux/* $target/lib/firmware
+    rm -rf $fwdir
 fi
 
 if [ -f $target/etc/NetworkManager/NetworkManager.conf ]; then
@@ -24,22 +27,21 @@ wifi.scan-rand-mac-address=no
 EOF
 fi
 
-cat << EOF > $target/etc/default/u-boot
-U_BOOT_FDT=qcom/apq8016-sbc.dtb
-U_BOOT_PARAMETERS="rw rootwait"
-EOF
-
 cat << EOF > $target/etc/fstab
 /dev/disk/by-partlabel/rootfs / ext4   rw,relatime,data=ordered 0 1
 EOF
 
-# hack - the "make deb" kernel package should handle this
-for kernel in $target/boot/vmlinuz-*
-do
-    mv $kernel $kernel.gz
-    gunzip $kernel
-    ver=$(echo $kernel|sed -e 's,.*vmlinuz-,,')
-    chroot $target /usr/sbin/update-initramfs -c -k $ver
-done
+WORKSPACE=${WORKSPACE:-$HOME}
+OUT=$WORKSPACE/out
+mkdir -p $OUT
+cat $target/boot/vmlinuz-${KVERS} $target/usr/lib/linux-image-${KVERS}/$fdtfile >> $OUT/Image.gz
 
-chroot $target /usr/sbin/u-boot-update||true
+# In case initrd doesn't exist, create it, else update
+if [ -f $target/boot/initrd.img-${KVERS} ]
+then
+    chroot $target /usr/sbin/update-initramfs -u -k ${KVERS}
+else
+    chroot $target /usr/sbin/update-initramfs -c -k ${KVERS}
+fi
+cp $target/boot/initrd.img-${KVERS} $OUT/initrd.img
+
