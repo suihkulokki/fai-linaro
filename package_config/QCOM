@@ -1,5 +1,9 @@
-PACKAGES install-norec
+PACKAGES install-norec DB410C
 linux-image-4.9.0-qcomlt
+
+PACKAGES install-norec DB820C
+firmware-atheros
+linux-image-4.11.0-qcomlt
 
 PACKAGES install-norec UBOOT
 u-boot-menu

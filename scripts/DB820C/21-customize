@@ -1,0 +1,28 @@
+#!/bin/bash
+set -e
+
+if [ -f $target/etc/NetworkManager/NetworkManager.conf ]; then
+   cat << EOF >> $target/etc/NetworkManager/NetworkManager.conf
+[device]
+wifi.scan-rand-mac-address=no
+EOF
+fi
+
+cat << EOF > $target/etc/fstab
+/dev/disk/by-partlabel/userdata / ext4   rw,relatime,data=ordered 0 1
+EOF
+
+WORKSPACE=${WORKSPACE:-$HOME}
+OUT=$WORKSPACE/out
+mkdir -p $OUT
+cat $target/boot/vmlinuz-${KVERS} $target/usr/lib/linux-image-${KVERS}/$fdtfile >> $OUT/Image.gz
+
+# In case initrd doesn't exist, create it, else update
+if [ -f $target/boot/initrd.img-${KVERS} ]
+then
+    chroot $target /usr/sbin/update-initramfs -u -k ${KVERS}
+else
+    chroot $target /usr/sbin/update-initramfs -c -k ${KVERS}
+fi
+cp $target/boot/initrd.img-${KVERS} $OUT/initrd.img
+
