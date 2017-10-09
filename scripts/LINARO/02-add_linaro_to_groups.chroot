@@ -1,4 +1,5 @@
-#!/bin/sh -x
+#!/bin/sh
+set -e
 
 DEFGROUPS="adm,dialout,cdrom,audio,dip,video,plugdev,bluetooth,pulse-access,sudo,systemd-journal,netdev,staff"
 

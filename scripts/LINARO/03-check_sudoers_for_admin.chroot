@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 # check to make sure sudoers file has ref for the sudo group
 SUDOEXISTS="$(awk '$1 == "%sudo" { print $1 }' $target/etc/sudoers)"

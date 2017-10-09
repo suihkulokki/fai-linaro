@@ -1,4 +1,5 @@
 #!/bin/sh  
+set -e
 
 echo "I: create linaro user"
 chroot $target adduser --gecos linaro --disabled-login linaro

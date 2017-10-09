@@ -1,4 +1,5 @@
 #! /bin/bash
+set -e
 
 rm -f $target/etc/udev/rules.d/70-persistent-net.rules \
       $target/lib/udev/write_net_rules \

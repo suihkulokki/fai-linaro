@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -e
 # Make systemd less spammy
 
 sed -i 's/#LogLevel=info/LogLevel=warning/' \

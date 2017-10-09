@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # workaround 90s delay
 services=(NetworkManager systemd-networkd)
