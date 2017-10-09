@@ -1,13 +1,13 @@
-#! /bin/bash
+#!/bin/bash
 set -e
 
 rm -f $target/etc/udev/rules.d/70-persistent-net.rules \
       $target/lib/udev/write_net_rules \
       $target/etc/mailname \
       $target/etc/machine-id \
-      $target/var/lib/dbus/machine-id
+      $target/var/lib/dbus/machine-id \
+      $target/etc/ssh/ssh_host_*
 
 touch $target/etc/machine-id
 
-shred --remove $target/etc/ssh/ssh_host_*
 
