@@ -1,0 +1,14 @@
+#!/bin/bash
+# store a basefile for faster rebuild
+ifclass SID && BASENAME=SID
+ifclass STRETCH && BASENAME=STRETCH
+
+[ "x$BASENAME" != "x" ]||exit 0
+
+mkdir -p $FAI/basefiles 
+if [ ! -r $FAI/basefiles/$BASENAME.tar.gz ]
+then
+	echo making cache for faster reruns
+	tar caf $FAI/basefiles/$BASENAME.tar.gz -C $target .
+fi
+
