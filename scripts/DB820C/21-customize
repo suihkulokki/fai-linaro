@@ -12,11 +12,6 @@ cat << EOF > $target/etc/fstab
 /dev/disk/by-partlabel/userdata / ext4   rw,relatime,data=ordered 0 1
 EOF
 
-WORKSPACE=${WORKSPACE:-$HOME}
-OUT=$WORKSPACE/out
-mkdir -p $OUT
-cat $target/boot/vmlinuz-${KVERS} $target/usr/lib/linux-image-${KVERS}/$fdtfile >> $OUT/Image.gz
-
 # In case initrd doesn't exist, create it, else update
 if [ -f $target/boot/initrd.img-${KVERS} ]
 then
@@ -24,5 +19,9 @@ then
 else
     chroot $target /usr/sbin/update-initramfs -c -k ${KVERS}
 fi
-cp $target/boot/initrd.img-${KVERS} $OUT/initrd.img
 
+OUT=$FAI/out
+mkdir -p $OUT
+cp $target/boot/vmlinuz-${KVERS} $OUT/Image.gz
+cp $target/usr/lib/linux-image-${KVERS}/$fdtfile $OUT/
+cp $target/boot/initrd.img-${KVERS} $OUT/initrd.img
