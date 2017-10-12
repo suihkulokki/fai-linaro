@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
-mkdir -o "${FAI}/out/"
+mkdir -p "${FAI}/out/"
 chroot "${target}" dpkg -l > "${FAI}/out/packages.txt"
