@@ -1,3 +1,4 @@
 #!/bin/bash
 set -e
-chroot $target dpkg -l > $FAI/packages.txt
+mkdir -o "${FAI}/out/"
+chroot "${target}" dpkg -l > "${FAI}/out/packages.txt"
