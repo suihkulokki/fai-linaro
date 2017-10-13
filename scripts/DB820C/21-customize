@@ -22,6 +22,8 @@ fi
 
 OUT=$FAI/out
 mkdir -p $OUT
-cp $target/boot/vmlinuz-${KVERS} $OUT/Image.gz
+cp $target/boot/vmlinuz-${KVERS} $OUT/
 cp $target/usr/lib/linux-image-${KVERS}/$fdtfile $OUT/
-cp $target/boot/initrd.img-${KVERS} $OUT/initrd.img
+cp $target/boot/initrd.img-${KVERS} $OUT/
+cp $target/boot/config-${KVERS} $OUT/
+cp $target/boot/System.map-${KVERS} $OUT/
