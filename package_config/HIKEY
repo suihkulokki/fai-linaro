@@ -1,0 +1,7 @@
+PACKAGES install-norec
+grub-efi-arm64
+linux-image-reference-arm64
+firmware-linux-free
+firmware-misc-nonfree
+firmware-ti-connectivity
+firmware-hikey-nonfree

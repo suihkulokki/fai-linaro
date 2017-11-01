@@ -28,23 +28,28 @@ fi
 $ROOTCMD grub-mkdevicemap --no-floppy
 GROOT=$($ROOTCMD grub-probe -tdrive -d $BOOT_DEVICE)
 
-
-# Check if RAID is used for the boot device
-if [[ $BOOT_DEVICE =~ '/dev/md' ]]; then
-    raiddev=${BOOT_DEVICE#/dev/}
-    # install grub on all members of RAID
-    for device in `LC_ALL=C perl -ne 'if(/^'$raiddev'\s.+raid\d+\s(.+)/){ $_=$1; s/\d+\[\d+\]//g; print }' /proc/mdstat`; do
-	echo Install grub on /dev/$device
-	$ROOTCMD grub-install --no-floppy "/dev/$device"
-    done
-
-elif [[ $GROOT =~ 'hostdisk' ]]; then
+if [[ $GROOT =~ 'hostdisk' ]]; then
     cat > $target/boot/grub/device.map <<EOF
 (hd0)   $BOOT_DEVICE
 EOF
-    $ROOTCMD grub-install --no-floppy --modules=part_msdos $BOOT_DEVICE
-    if [ $? -eq 0 ]; then
-        echo "Grub installed on hostdisk $BOOT_DEVICE"
+    if ifclass HIKEY; then
+        # Standard grub-install for SD card
+        $ROOTCMD grub-install --removable --no-nvram $BOOT_DEVICE
+        if [ $? -eq 0 ]; then
+            echo "Hikey grub for SD card installed"
+        fi
+        # Custom grub for emmc and lava
+cat << EOF > $target/boot/grub/emmc.config
+set root=(hd0,gpt9)
+set prefix=(\$root)'/boot/grub'
+configfile \$prefix/grub.cfg
+EOF
+        GRUB_MODULES="boot chain configfile echo efinet eval ext2 fat font gettext gfxterm gzio help linux loadenv lsefi normal part_gpt part_msdos read regexp search search_fs_file search_fs_uuid search_label terminal terminfo test tftp time"
+
+        $ROOTCMD grub-mkimage --prefix='(hd0,gpt9)/boot/grub' \
+            --config=/boot/grub/emmc.config --output=/boot/efi/EFI/BOOT/GRUBAA64.EFI \
+            --format=arm64-efi --compression=auto $GRUB_MODULES
+        echo "Standalone Hikey grub for eMMC and LAVA installed"
     fi
     rm $target/boot/grub/device.map
 
