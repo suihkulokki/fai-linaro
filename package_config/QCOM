@@ -3,6 +3,7 @@ linux-image-4.9.0-qcomlt
 
 PACKAGES install-norec DB820C
 firmware-atheros
+firmware-qcom-dragonboard820c
 linux-image-4.11.0-qcomlt
 
 PACKAGES install-norec UBOOT
