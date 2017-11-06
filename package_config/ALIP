@@ -23,6 +23,7 @@ fonts-ipafont-mincho
 fonts-unfonts-core
 gdbserver
 git
+glmark2
 glshim
 gnome-keyring
 gnupg
