@@ -1,25 +1,6 @@
 #!/bin/bash
 set -e
 
-# Download license file and firmware
-if [ -n "${QCOM_FIRMWARE}" ]; then
-    fwdir=`mktemp -d qcom_fwXXXXXX`
-    cd $fwdir
-    wget -q ${QCOM_FIRMWARE}
-    echo "${QCOM_FIRMWARE_MD5}  $(basename ${QCOM_FIRMWARE})" > MD5
-    md5sum -c MD5
-    unzip $(basename ${QCOM_FIRMWARE})
-    # check LICENSE file (for Linux BSP)
-    echo "${QCOM_FIRMWARE_LICENSE_MD5} " linux-board-support-package-*/LICENSE > MD5
-    md5sum -c MD5
-    cd -
-    MTOOLS_SKIP_CHECK=1 mcopy -i $fwdir/linux-board-support-package-*/bootloaders-linux/NON-HLOS.bin \
-         ::image/modem.* ::image/mba.mbn ::image/wcnss.* $fwdir/linux-board-support-package-*/proprietary-linux
-    cp -f $fwdir/linux-board-support-package-*/LICENSE $target/etc/QCOM-LINUX-BOARD-SUPPORT-LICENSE
-    cp -a $fwdir/linux-board-support-package-*/proprietary-linux/* $target/lib/firmware
-    rm -rf $fwdir
-fi
-
 if [ -f $target/etc/NetworkManager/NetworkManager.conf ]; then
    cat << EOF >> $target/etc/NetworkManager/NetworkManager.conf
 [device]

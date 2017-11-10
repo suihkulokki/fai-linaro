@@ -1,5 +1,2 @@
-QCOM_FIRMWARE='http://builds.96boards.org/releases/dragonboard410c/qualcomm/firmware/linux-board-support-package-r1032.1.zip'
-QCOM_FIRMWARE_MD5='e1c7e8957b8f37a91cadc18c1aef5c04'
-QCOM_FIRMWARE_LICENSE_MD5='4d087ee0965cb059f1b2f9429e166f64'
 KVERS=4.9.0-qcomlt
 fdtfile=qcom/apq8016-sbc.dtb

@@ -1,4 +1,5 @@
 PACKAGES install-norec DB410C
+firmware-qcom-dragonboard410c
 linux-image-4.9.0-qcomlt
 
 PACKAGES install-norec DB820C
