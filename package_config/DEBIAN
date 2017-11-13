@@ -24,6 +24,7 @@ lsb-release
 makedev
 mawk
 nano
+network-manager
 ntpdate
 openssh-client
 openssh-server
