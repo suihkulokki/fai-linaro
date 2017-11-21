@@ -12,6 +12,16 @@ cat << EOF > $target/etc/fstab
 /dev/disk/by-partlabel/rootfs / ext4   rw,relatime,data=ordered 0 1
 EOF
 
+if ifclass INSTALLER; then
+    # no need to resize rootfs for SD card boot
+    rm -f $target/lib/systemd/system/resize-helper.service
+
+    # needed by GUI installer
+    cat << EOF >> $target/etc/fstab
+/dev/mmcblk1p9 /mnt vfat defaults 0 0
+EOF
+fi
+
 # In case initrd doesn't exist, create it, else update
 if [ -f $target/boot/initrd.img-${KVERS} ]
 then
