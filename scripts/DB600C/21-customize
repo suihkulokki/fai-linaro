@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+# In case initrd doesn't exist, create it, else update
+if [ -f $target/boot/initrd.img-${KVERS} ]
+then
+    chroot $target /usr/sbin/update-initramfs -u -k ${KVERS}
+else
+    chroot $target /usr/sbin/update-initramfs -c -k ${KVERS}
+fi
+
+OUT=$FAI/out
+mkdir -p $OUT
+cp $target/boot/vmlinuz-${KVERS} $OUT/
+cp $target/usr/lib/linux-image-${KVERS}/$fdtfile $OUT/
+cp $target/boot/initrd.img-${KVERS} $OUT/
+cp $target/boot/config-${KVERS} $OUT/
+cp $target/boot/System.map-${KVERS} $OUT/

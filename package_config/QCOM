@@ -2,6 +2,9 @@ PACKAGES install-norec DB410C
 firmware-qcom-dragonboard410c
 linux-image-4.9.0-qcomlt
 
+PACKAGES install-norec DB600C
+linux-image-armmp
+
 PACKAGES install-norec DB820C
 firmware-atheros
 firmware-qcom-dragonboard820c

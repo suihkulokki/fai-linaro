@@ -1,0 +1,2 @@
+KVERS=4.13.0-1-armmp
+fdtfile=qcom-apq8064-arrow-sd-600eval.dtb
