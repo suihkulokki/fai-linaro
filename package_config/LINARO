@@ -3,3 +3,4 @@ linaro-overlay-minimal
 96boards-tools-common
 python-pexpect
 python-yaml
+rsync
