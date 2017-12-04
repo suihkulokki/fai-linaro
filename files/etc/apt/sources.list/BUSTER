@@ -1,1 +1,2 @@
 deb ${apt_cdn}/debian ${release} main contrib non-free
+deb-src ${apt_cdn}/debian ${release} main contrib non-free
