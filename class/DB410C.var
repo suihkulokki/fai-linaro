@@ -1,2 +1,2 @@
-KVERS=4.9.0-qcomlt
+KVERS=4.14.0-qcomlt-arm64
 fdtfile=qcom/apq8016-sbc.dtb
