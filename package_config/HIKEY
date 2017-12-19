@@ -1,6 +1,6 @@
 PACKAGES install-norec
 grub-efi-arm64
-linux-image-reference-arm64
+linux-4.14-hikey
 firmware-linux-free
 firmware-misc-nonfree
 firmware-ti-connectivity
