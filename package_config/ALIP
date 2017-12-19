@@ -53,7 +53,6 @@ lsof
 lximage-qt
 lxqt-about
 lxqt-admin
-lxqt-common
 lxqt-config
 lxqt-globalkeys
 lxqt-notificationd
@@ -65,6 +64,8 @@ lxqt-qtplugin
 lxqt-runner
 lxqt-session
 lxqt-sudo
+lxqt-system-theme
+lxqt-themes
 mesa-utils
 mesa-utils-extra
 modemmanager
