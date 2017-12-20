@@ -1,2 +1,3 @@
 release=buster
 obs_release=buster
+FAI_DEBOOTSTRAP_OPTS=--include=gnupg

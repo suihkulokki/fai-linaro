@@ -1,2 +1,3 @@
 release=sid
 obs_release=sid
+FAI_DEBOOTSTRAP_OPTS=--include=gnupg
