@@ -1,2 +1,2 @@
 disk_config disk1
-raw-disk / 4GB ext4 rw createopts="-F"  
+raw-disk / 4GB ext4 rw createopts="-F"
