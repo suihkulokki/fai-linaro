@@ -59,6 +59,15 @@ else
         echo "Grub installed on $BOOT_DEVICE = $GROOT"
     fi
 fi
+
+# In case run in docker, dev/disk/by-uuid/ is out of date since udev runs outside docker
+
+mkdir -p $target/dev/disk/by-uuid/
+for dev in `blkid -o device | grep -v block`
+do
+    ln -sf "$dev" "$target/dev/disk/by-uuid/$(blkid -o value -s UUID "$dev")"
+done
+
 $ROOTCMD update-grub
 
 exit $error
