@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Replaces "udevadm settle" that doesn't work in containers
+
+(
+cd /dev
+while read line
+do
+	dev=$(echo "$line"|awk '{print $1}')
+	[ -b "$dev" ] || mknod $line
+done < <( awk '/[0-9]$/ {print $4" b "$1" "$2}' < /proc/partitions )
+)
