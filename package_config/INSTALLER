@@ -1,6 +1,5 @@
 PACKAGES install-norec
 96boards-installer-session
-android-tools-fsutils
 grub-common
 grub-efi-arm64
 kpartx
@@ -9,6 +8,7 @@ libgl1-mesa-glx
 lightdm
 mesa-utils
 network-manager
+simg2img
 x11-utils
 x11-xserver-utils
 xinit
