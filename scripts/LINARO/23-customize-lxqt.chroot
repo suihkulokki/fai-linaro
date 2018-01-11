@@ -3,17 +3,19 @@ set -e
 
 # Customize lxqt defaults
 if [ -e $target/usr/share/lxqt/lxqt.conf ]; then
-  # Copy files from /usr/share to /etc/xdg
-  mkdir -p $target/etc/xdg/lxqt
-  cp $target/usr/share/lxqt/lxqt.conf $target/etc/xdg/lxqt
-  cp $target/usr/share/lxqt/session.conf $target/etc/xdg/lxqt
-  mkdir -p $target/etc/xdg/pcmanfm-qt/lxqt/
-  cp $target/usr/share/pcmanfm-qt/lxqt/settings.conf $target/etc/xdg/pcmanfm-qt/lxqt
+  # Copy config files from /usr/share to linaro user
+  mkdir -p $target/home/linaro/.config/lxqt
+  cp $target/usr/share/lxqt/lxqt.conf $target/home/linaro/.config/lxqt
+  cp $target/usr/share/lxqt/session.conf $target/home/linaro/.config/lxqt
+  mkdir -p $target/home/linaro/.config/pcmanfm-qt/lxqt
+  cp $target/usr/share/pcmanfm-qt/lxqt/settings.conf $target/home/linaro/.config/pcmanfm-qt/lxqt
 
-  sed -i "s|^theme=.*|theme=kde-plasma|" $target/etc/xdg/lxqt/lxqt.conf
-  sed -i "s|^icon_theme=.*|icon_theme=breeze|" $target/etc/xdg/lxqt/lxqt.conf
-  sed -i "s|^style=.*|style=Breeze|" $target/etc/xdg/lxqt/lxqt.conf
-  sed -i "s|^window_manager=.*|window_manager=kwin|" $target/etc/xdg/lxqt/session.conf
-  sed -i "s|^cursor_theme=.*|cursor_theme=breeze_cursors|" $target/etc/xdg/lxqt/session.conf
-  sed -i "s|^Wallpaper=.*|Wallpaper=/usr/share/96boards/wallpapers/96boards-default-wallpaper.jpg|" $target/etc/xdg/pcmanfm-qt/lxqt/settings.conf
+  sed -i "s|^theme=.*|theme=kde-plasma|" $target/home/linaro/.config/lxqt/lxqt.conf
+  sed -i "s|^icon_theme=.*|icon_theme=breeze|" $target/home/linaro/.config/lxqt/lxqt.conf
+  sed -i "s|^style=.*|style=Breeze|" $target/home/linaro/.config/lxqt/lxqt.conf
+  sed -i "s|^window_manager=.*|window_manager=kwin|" $target/home/linaro/.config/lxqt/session.conf
+  sed -i "s|^cursor_theme=.*|cursor_theme=breeze_cursors|" $target/home/linaro/.config/lxqt/session.conf
+  sed -i "s|^Wallpaper=.*|Wallpaper=/usr/share/96boards/wallpapers/96boards-default-wallpaper.jpg|" $target/home/linaro/.config/pcmanfm-qt/lxqt/settings.conf
+
+  chroot $target chown -R linaro:linaro /home/linaro/.config
 fi
