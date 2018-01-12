@@ -8,7 +8,7 @@ linux-image-4.14.0-qcomlt-arm
 PACKAGES install-norec DB820C
 firmware-atheros
 firmware-qcom-dragonboard820c
-linux-image-4.11.0-qcomlt
+linux-image-4.11.0-qcomlt-arm64
 
 PACKAGES install-norec UBOOT
 u-boot-menu
