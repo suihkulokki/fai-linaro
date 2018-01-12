@@ -1,2 +1,2 @@
-KVERS=4.11.0-qcomlt
+KVERS=4.11.0-qcomlt-arm64
 fdtfile=qcom/apq8096-db820c.dtb
