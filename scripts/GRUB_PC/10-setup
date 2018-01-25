@@ -40,13 +40,13 @@ EOF
         fi
         # Custom grub for emmc and lava
 cat << EOF > $target/boot/grub/emmc.config
-set root=(hd0,gpt9)
+search.fs_label rootfs root
 set prefix=(\$root)'/boot/grub'
 configfile \$prefix/grub.cfg
 EOF
         GRUB_MODULES="boot chain configfile echo efinet eval ext2 fat font gettext gfxterm gzio help linux loadenv lsefi normal part_gpt part_msdos read regexp search search_fs_file search_fs_uuid search_label terminal terminfo test tftp time"
 
-        $ROOTCMD grub-mkimage --prefix='(hd0,gpt9)/boot/grub' \
+        $ROOTCMD grub-mkimage --prefix='($root)/boot/grub' \
             --config=/boot/grub/emmc.config --output=/boot/efi/EFI/BOOT/GRUBAA64.EFI \
             --format=arm64-efi --compression=auto $GRUB_MODULES
         echo "Standalone Hikey grub for eMMC and LAVA installed"
