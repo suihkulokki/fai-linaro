@@ -1,4 +1,4 @@
 disk_config disk1 disklabel:msdos fstabkey:uuid bootable:1
 primary /boot/efi 64 vfat rw
-primary / 1G- ext4 rw createopts="-L rootfs"
+primary / 1G- ext4 rw createopts="-L rootfs-sd"
 
