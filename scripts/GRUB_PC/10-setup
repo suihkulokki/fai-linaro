@@ -16,6 +16,9 @@ if [ -z "$BOOT_DEVICE" ]; then
     exit 189
 fi
 
+# make boot verbose by default
+sed -i -e 's,GRUB_CMDLINE_LINUX_DEFAULT="quiet",GRUB_CMDLINE_LINUX_DEFAULT="",' $target/etc/default/grub
+
 # disable os-prober because of #788062
 ainsl /etc/default/grub 'GRUB_DISABLE_OS_PROBER=true'
 

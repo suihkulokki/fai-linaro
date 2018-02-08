@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# replace UUID with label for /boot/efi
+sed -i -e 's,^UUID.*/boot/efi.*$,LABEL=BOOT     /boot/efi       vfat    rw      0       2,' $target/etc/fstab
+
 echo hi655x_pmic >> $target/etc/initramfs-tools/modules
 $ROOTCMD update-initramfs -u -k all
 
